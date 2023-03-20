@@ -8,6 +8,8 @@ class Keranjang {
 let belanja = [
 	{ produk: "Kemeja Pria", stock: 10, harga: 120000 },
 	{ produk: "Celana Jeans Pria", stock: 5, harga: 200000 },
+	{ produk: "Sepatu Air Jordan High", stock: 3, harga: 2000000 },
+	{ produk: "Yeezy Stock", stock: 5, harga: 4000000 },
 ];
 let tampilanBelanja = "";
 
@@ -39,7 +41,7 @@ while (menu != 3) {
 			let qty = parseInt(prompt("qty brp?"));
 			console.log(item);
 			qty > item.stock || qty < 0
-				? alert("input ngaco")
+				? alert("input tidak sesuai")
 				: keranjang.push(new Keranjang(item.produk, qty, item.harga));
 		}
 	} else if (menu == 2) {
@@ -50,4 +52,4 @@ while (menu != 3) {
 		alert("menu belum dibuat");
 	}
 }
-console.log(alert);
+console.log(belanja);

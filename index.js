@@ -27,51 +27,62 @@ belanja.forEach((val, index) => {
 });
 
 let keranjang = [];
+
 let menu = 0;
 while (menu != 3) {
 	menu = prompt(`
 1. menu
 2. keranjang
-3. exit`);
+3. exit
+`);
 
 	if (menu == "1") {
 		let opt = parseInt(prompt(tampilanBelanja));
 		if (opt > 0 && opt < 9) {
 			let item = belanja[opt - 1];
-			let qty = parseInt(prompt("berapa pcs ?"));
+			let qty = parseInt(prompt("qty brp?"));
 			console.log(item);
 			qty > item.stock || qty < 0
-				? alert("input tidak sesuai.")
+				? alert("input ngaco")
 				: keranjang.push(new Keranjang(item.produk, qty, item.harga));
 		}
 	} else if (menu == 2) {
-		let menu2 = 0;
-		menu2 = prompt(`
-1. checkout
-2. delete
-3. edit
-4. back`);
-		if (menu2 == "1") {
-			let total = 0;
-			for (let i = 0; i < keranjang.length; i++) {
-				let totalHarga = keranjang[i].harga * keranjang[i].qty;
-				total += totalHarga;
-				prompt(
-					i +
-						1 +
-						"." +
-						" " +
-						keranjang[i].produk +
-						" Rp. " +
-						keranjang[i].harga +
-						" Qty : " +
-						keranjang[i].qty +
-						"\n" +
-						" Total harga : " +
-						totalHarga
-				);
+		let temkeranjang = "";
+		for (i = 0; i < keranjang.length; i++) {
+			temkeranjang += `\n ${i + 1}.   Produk : ${
+				keranjang[i].produk
+			},    Qty : ${keranjang[i].qty}   Harga : ${keranjang[i].harga} 
+          
+          
+          Type "co" for Check out
+          Type item number for Edit Qty or Delete Item`;
+		}
+		console.log(temkeranjang);
+		let opt2 = prompt(temkeranjang);
+
+		if (opt2 == "co") {
+			let totalharga = 0;
+			for (h = 0; h < keranjang.length; h++) {
+				totalharga += keranjang[h].harga * keranjang[h].qty;
 			}
-			prompt("Total harga: " + total);
+
+			let tampiltotal = prompt(
+				`Total Harga yang Harus Dibayar Adalah : ${totalharga}`
+			);
+			let sisabayar = tampiltotal - totalharga;
+			if (tampiltotal >= totalharga) {
+				prompt(`Pembayaran Selesai, Kembalian Uang Anda = ${sisabayar}`);
+			} else {
+				prompt("Nominal harga yang Anda Inputkan salah bung..!!");
+			}
+		} else if (opt2 > 0 || opt2 < keranjang.length) {
+			let tempED = opt2;
+			let opt2a = prompt(`${opt2}
+
+            1. Edit Qty
+            2. Delete Item
+
+            `);
 		}
 	} else if (menu == 3) {
 		alert("terima kasih sudah berkunjung");
@@ -79,4 +90,3 @@ while (menu != 3) {
 		alert("menu belum dibuat");
 	}
 }
-console.log(belanja);

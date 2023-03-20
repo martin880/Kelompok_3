@@ -45,7 +45,31 @@ while (menu != 3) {
 				: keranjang.push(new Keranjang(item.produk, qty, item.harga));
 		}
 	} else if (menu == 2) {
-		console.log(keranjang);
+		let menu2 = 0;
+		menu2 = prompt(`
+1. checkout
+2. delete
+3. edit
+4. back`);
+		if (menu2 == "1") {
+			let total = 0;
+			for (let i = 0; i < keranjang.length; i++) {
+				let totalHarga = keranjang[i].harga * keranjang[i].qty;
+				total += totalHarga;
+				prompt(
+					i +
+						" " +
+						keranjang[i].produk +
+						" Qty : " +
+						keranjang[i].qty +
+						" Rp. " +
+						keranjang[i].harga +
+						" Total harga : " +
+						totalHarga
+				);
+			}
+			prompt("Total harga: " + total);
+		}
 	} else if (menu == 3) {
 		alert("terima kasih sudah berkunjung");
 	} else {

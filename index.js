@@ -31,9 +31,9 @@ let keranjang = [];
 let menu = 0;
 while (menu != 3) {
 	menu = prompt(`
-1. menu
-2. keranjang
-3. exit
+1. Menu
+2. Keranjang
+3. Exit
 `);
 
 	if (menu == "1") {
@@ -43,46 +43,60 @@ while (menu != 3) {
 			let qty = parseInt(prompt("qty brp?"));
 			console.log(item);
 			qty > item.stock || qty < 0
-				? alert("input ngaco")
+				? alert("Input salah")
 				: keranjang.push(new Keranjang(item.produk, qty, item.harga));
 		}
 	} else if (menu == 2) {
-		let temkeranjang = "";
+		let tempKeranjang = "";
 		for (i = 0; i < keranjang.length; i++) {
-			temkeranjang += `\n ${i + 1}.   Produk : ${
+			tempKeranjang += `\n ${i + 1}.   Produk : ${
 				keranjang[i].produk
 			},    Qty : ${keranjang[i].qty}   Harga : ${keranjang[i].harga} 
-          
-          
-          Type "co" for Check out
-          Type item number for Edit Qty or Delete Item`;
-		}
-		console.log(temkeranjang);
-		let opt2 = prompt(temkeranjang);
 
-		if (opt2 == "co") {
-			let totalharga = 0;
+          Ketik "CO" untuk Check out
+          Ketik angka 1 untuk Edit Qty or Delete Item`;
+		}
+		console.log(tempKeranjang);
+		let opt2 = prompt(tempKeranjang);
+
+		if (opt2 == "CO") {
+			let totalHarga = 0;
 			for (h = 0; h < keranjang.length; h++) {
-				totalharga += keranjang[h].harga * keranjang[h].qty;
+				totalHarga += keranjang[h].harga * keranjang[h].qty;
 			}
 
-			let tampiltotal = prompt(
-				`Total Harga yang Harus Dibayar Adalah : ${totalharga}`
+			let tampilTotal = prompt(
+				`Total Harga yang Harus Dibayar Adalah : ${totalHarga}`
 			);
-			let sisabayar = tampiltotal - totalharga;
-			if (tampiltotal >= totalharga) {
+			let sisabayar = tampilTotal - totalHarga;
+			if (tampilTotal >= totalHarga) {
 				prompt(`Pembayaran Selesai, Kembalian Uang Anda = ${sisabayar}`);
 			} else {
 				prompt("Nominal harga yang Anda Inputkan salah bung..!!");
 			}
 		} else if (opt2 > 0 || opt2 < keranjang.length) {
 			let tempED = opt2;
-			let opt2a = prompt(`${opt2}
+			let opt2a = prompt(`${tempED}
 
             1. Edit Qty
             2. Delete Item
 
             `);
+
+			if (opt2a == 1) {
+				let opt2b = prompt("Masukkan qty baru...");
+				keranjang[opt2a - 1].qty = opt2b;
+			} else if (opt2a == 2) {
+				let opt2c = prompt(`Apakah anda yakin ???
+                1. YES
+                2. NO`);
+
+				if (opt2c == 1) {
+					opt2a == prompt("Tidak ada barang dikeranjang");
+				}
+			} else {
+				prompt(`Pilihan tidak valid...!!`);
+			}
 		}
 	} else if (menu == 3) {
 		alert("terima kasih sudah berkunjung");

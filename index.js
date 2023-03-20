@@ -38,10 +38,10 @@ while (menu != 3) {
 		let opt = parseInt(prompt(tampilanBelanja));
 		if (opt > 0 && opt < 9) {
 			let item = belanja[opt - 1];
-			let qty = parseInt(prompt("qty brp?"));
+			let qty = parseInt(prompt("berapa pcs ?"));
 			console.log(item);
 			qty > item.stock || qty < 0
-				? alert("input tidak sesuai")
+				? alert("input tidak sesuai.")
 				: keranjang.push(new Keranjang(item.produk, qty, item.harga));
 		}
 	} else if (menu == 2) {
@@ -58,12 +58,15 @@ while (menu != 3) {
 				total += totalHarga;
 				prompt(
 					i +
+						1 +
+						"." +
 						" " +
 						keranjang[i].produk +
-						" Qty : " +
-						keranjang[i].qty +
 						" Rp. " +
 						keranjang[i].harga +
+						" Qty : " +
+						keranjang[i].qty +
+						"\n" +
 						" Total harga : " +
 						totalHarga
 				);

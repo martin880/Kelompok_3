@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise</title>
+  </head>
+  <body></body>
+  <script>
+    class Keranjang {
+      constructor(produk, qty, harga) {
+        this.produk = produk;
+        this.qty = qty;
+        this.harga = harga;
+      }
+    }
+    let belanja = [
+      { produk: "Kemeja Pria", stock: 10, harga: 120000 },
+      { produk: "Celana Jeans Pria", stock: 5, harga: 200000 },
+    ];
+    let tampilanBelanja = "";
+
+    belanja.forEach((val, index) => {
+      tampilanBelanja +=
+        index +
+        1 +
+        ". " +
+        val.produk +
+        " Stock " +
+        val.stock +
+        " Rp.@" +
+        val.harga.toLocaleString("id-ID") +
+        "\n";
+    });
+
+    let keranjang = [];
+
+    let menu = 0;
+    while (menu != 3) {
+      menu = prompt(`
+1. menu
+2. keranjang
+3. exit
+`);
+
+      if (menu == "1") {
+        let opt = parseInt(prompt(tampilanBelanja));
+        if (opt > 0 && opt < 9) {
+          let item = belanja[opt - 1];
+          let qty = parseInt(prompt("qty brp?"));
+          console.log(item);
+          qty > item.stock || qty < 0
+            ? alert("input ngaco")
+            : keranjang.push(new Keranjang(item.produk, qty, item.harga));
+        }
+      } else if (menu == 2) {
+        let temkeranjang = "";
+        for (i = 0; i < keranjang.length; i++) {
+          temkeranjang += `\n ${i + 1}.   Produk : ${
+            keranjang[i].produk
+          },    Qty : ${keranjang[i].qty}   Harga : ${keranjang[i].harga} 
+          
+          
+          Type "co" for Check out
+          Type item number for Edit Qty or Delete Item`;
+        }
+        console.log(temkeranjang);
+        let opt2 = prompt(temkeranjang);
+
+        if (opt2 == "co") {
+          let totalharga = 0;
+          for (h = 0; h < keranjang.length; h++) {
+            totalharga += keranjang[h].harga * keranjang[h].qty;
+          }
+
+          let tampiltotal = prompt(
+            `Total Harga yang Harus Dibayar Adalah : ${totalharga}`
+          );
+          let sisabayar = tampiltotal - totalharga;
+          if (tampiltotal >= totalharga) {
+            prompt(`Pembayaran Selesai, Kembalian Uang Anda = ${sisabayar}`);
+          } else {
+            prompt("Nominal harga yang Anda Inputkan salah bung..!!");
+          }
+        } else if (opt2 > 0 || opt2 < keranjang.length) {
+          let tempED = opt2;
+          let opt2a = prompt(`${opt2}
+
+            1. Edit Qty
+            2. Delete Item
+
+            `);
+        }
+      } else if (menu == 3) {
+        alert("terima kasih sudah berkunjung");
+      } else {
+        alert("menu belum dibuat");
+      }
+    }
+  </script>
+</html>
